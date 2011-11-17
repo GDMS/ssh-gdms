@@ -141,6 +141,29 @@ public class PreviewAction extends ActionSupport {
 		} catch (Exception e) {
 			log.warn(e.toString());
 		}
+
+		// 判断学生绩点是否低于最低要求
+		double creditNotToChoose = 0.0;
+		try {
+			Property p = propertyDAO.findByKey("CreditNotToChoose");
+			creditNotToChoose = Double.parseDouble(p.getValue());
+		} catch (NumberFormatException e) {
+			creditNotToChoose = 0.0;
+			log.warn(e.toString());
+		}
+		Double credit = 0.0;
+		try {
+			credit = st.getCredit();
+		} catch (NullPointerException e) {
+			credit = 0.0;
+			log.warn(e.toString());
+		}
+		if (credit < creditNotToChoose) {
+			addActionError("选择的学生绩点为：" + credit + "，小于最低绩点要求："
+					+ creditNotToChoose);
+			return "wrong";
+		}
+
 		int num = 0;// 教师现选学生数
 		Iterator<Thesis> it = teacher.getThesises().iterator();
 		while (it.hasNext()) {

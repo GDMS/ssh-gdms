@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import hibernate.tables.Preview;
 import hibernate.tables.PreviewDAO;
+import hibernate.tables.Property;
+import hibernate.tables.PropertyDAO;
 import hibernate.tables.Student;
 import hibernate.tables.StudentDAO;
 import hibernate.tables.Thesis;
@@ -36,6 +38,9 @@ public class AssignAutoAction extends ActionSupport {
 	private ThesisDAO thesisDAO;
 	@Autowired
 	private StudentDAO studentDAO;
+	@Autowired
+	private PropertyDAO propertyDAO;
+
 	List<Student> students;
 	private int page;
 
@@ -85,8 +90,20 @@ public class AssignAutoAction extends ActionSupport {
 	@Transactional(readOnly = false)
 	protected boolean allAssign() {
 		AUTO = "auto1";
+		// 获取不能够自动分配的学生
+		double creditNotToAssign = 0.0;
+		try {
+			Property p = propertyDAO.findByKey("CreditNotToAssign");
+			creditNotToAssign = Double.parseDouble(p.getValue());
+		} catch (NumberFormatException e) {
+			creditNotToAssign = 0.0;
+			log.warn(e.toString());
+		}
 		@SuppressWarnings("unchecked")
-		List<Student> students = studentDAO.findAllByCreditDesc();
+		// List<Student> students =
+		// studentDAO.findAllWithNullThesisByCreditDesc();
+		List<Student> students = studentDAO
+				.findAllWithNullThesisByCreditDescGreaterAndEquals(creditNotToAssign);
 		Iterator<Student> studentsIterator = students.iterator();
 		List<Preview> previews = new ArrayList<Preview>();
 		while (studentsIterator.hasNext()) {
@@ -124,8 +141,8 @@ public class AssignAutoAction extends ActionSupport {
 					student.setThesis(thesis);
 					student.setAssign(AUTO);
 					student.setAutoassign(AUTO);
-					thesisDAO.merge(thesis);
-					studentDAO.merge(student);
+					//thesisDAO.merge(thesis);
+					//studentDAO.merge(student);
 				}
 			}
 
@@ -144,8 +161,19 @@ public class AssignAutoAction extends ActionSupport {
 	@Transactional(readOnly = false)
 	protected boolean allAssignWithoutGrade() {
 		AUTO = "auto1";
+		// 获取不能够自动分配的学生
+		double creditNotToAssign = 0.0;
+		try {
+			Property p = propertyDAO.findByKey("CreditNotToAssign");
+			creditNotToAssign = Double.parseDouble(p.getValue());
+		} catch (NumberFormatException e) {
+			creditNotToAssign = 0.0;
+			log.warn(e.toString());
+		}
 		@SuppressWarnings("unchecked")
-		List<Student> students = studentDAO.findAll();
+		// List<Student> students = studentDAO.findAll();
+		List<Student> students = studentDAO
+				.findAllWithNullThesisByCreditDescGreaterAndEquals(creditNotToAssign);
 		List<Preview> previews = new ArrayList<Preview>();
 		while (!students.isEmpty()) {
 			int no = MathEx.randomInt(0, students.size() - 1);
@@ -203,8 +231,19 @@ public class AssignAutoAction extends ActionSupport {
 	@Transactional(readOnly = false)
 	protected boolean optAssign() {
 		AUTO = "auto2";
-		@SuppressWarnings("unchecked")
-		List<Student> students = studentDAO.findAllByCreditDesc();
+		// 获取不能够自动分配的学生
+		double creditNotToAssign = 0.0;
+		try {
+			Property p = propertyDAO.findByKey("CreditNotToAssign");
+			creditNotToAssign = Double.parseDouble(p.getValue());
+		} catch (NumberFormatException e) {
+			creditNotToAssign = 0.0;
+			log.warn(e.toString());
+		}
+		// List<Student> students =
+		// studentDAO.findAllWithNullThesisByCreditDesc();
+		List<Student> students = studentDAO
+				.findAllWithNullThesisByCreditDescGreaterAndEquals(creditNotToAssign);
 		Iterator<Student> studentsIterator = students.iterator();
 		while (studentsIterator.hasNext()) {
 			Student student_ = studentsIterator.next();
@@ -255,8 +294,20 @@ public class AssignAutoAction extends ActionSupport {
 	@Transactional(readOnly = false)
 	protected boolean leftAssign() {
 		AUTO = "auto3";
+		// 获取不能够自动分配的学生
+		double creditNotToAssign = 0.0;
+		try {
+			Property p = propertyDAO.findByKey("CreditNotToAssign");
+			creditNotToAssign = Double.parseDouble(p.getValue());
+		} catch (NumberFormatException e) {
+			creditNotToAssign = 0.0;
+			log.warn(e.toString());
+		}
 		@SuppressWarnings("unchecked")
-		List<Student> students = studentDAO.findAllByCreditDesc();
+		// List<Student> students =
+		// studentDAO.findAllWithNullThesisByCreditDesc();
+		List<Student> students = studentDAO
+				.findAllWithNullThesisByCreditDescGreaterAndEquals(creditNotToAssign);
 		Iterator<Student> studentsIterator = students.iterator();
 		while (studentsIterator.hasNext()) {
 			Student student_ = studentsIterator.next();
@@ -301,8 +352,19 @@ public class AssignAutoAction extends ActionSupport {
 	@Transactional(readOnly = false)
 	protected boolean otherAssign() {
 		AUTO = "auto4";
+		// 获取不能够自动分配的学生
+		double creditNotToAssign = 0.0;
+		try {
+			Property p = propertyDAO.findByKey("CreditNotToAssign");
+			creditNotToAssign = Double.parseDouble(p.getValue());
+		} catch (NumberFormatException e) {
+			creditNotToAssign = 0.0;
+			log.warn(e.toString());
+		}
 		@SuppressWarnings("unchecked")
-		List<Student> students = studentDAO.findByThesisNull();
+		// List<Student> students = studentDAO.findByThesisNull();
+		List<Student> students = studentDAO
+				.findAllWithNullThesisByCreditDescGreaterAndEquals(creditNotToAssign);
 		Iterator<Student> studentsIterator = students.iterator();
 		while (studentsIterator.hasNext()) {
 			Student student = studentsIterator.next();
@@ -454,5 +516,9 @@ public class AssignAutoAction extends ActionSupport {
 
 	public void setAssignMethod(Integer assignMethod) {
 		this.assignMethod = assignMethod;
+	}
+
+	public void setPropertyDAO(PropertyDAO propertyDAO) {
+		this.propertyDAO = propertyDAO;
 	}
 }

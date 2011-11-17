@@ -139,11 +139,22 @@ public class StudentDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List findAllByCreditDesc() {
+	public List findAllWithNullThesisByCreditDesc() {
 		log.debug("finding all Student instances by credit desc");
 		try {
 			String queryString = "from Student where thesis is null order by credit desc";
 			return getHibernateTemplate().find(queryString);
+		} catch (RuntimeException re) {
+			log.error("find all failed", re);
+			throw re;
+		}
+	}
+
+	public List findAllWithNullThesisByCreditDescGreaterAndEquals(double credit) {
+		log.debug("finding all Student instances by credit desc");
+		try {
+			String queryString = "from Student s where thesis is null and s.credit >= ? order by credit desc";
+			return getHibernateTemplate().find(queryString, credit);
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
 			throw re;

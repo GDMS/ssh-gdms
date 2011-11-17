@@ -1,0 +1,7 @@
+1	教师最大预选学生比例（%）	MaxAssign			33
+2	是否允许学生注册	StudentReg	0		
+3	学生预选截止日期	StudentPreview		2011-11-18	
+4	教师预选第一志愿学生开始日期	PreviewSelectStart1		2011-11-09	
+5	教师预选第二志愿学生开始日期	PreviewSelectStart2		2011-11-15	
+6	教师预选第三志愿学生开始日期	PreviewSelectStart3		2011-11-16	
+7	允许参与分配学生最低绩点（包括）	CreditNotToAssign			1.2

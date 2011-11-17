@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="adminLoginAction" class="root.admin.AdminLoginAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminPyManageAction" class="root.admin.PyManageAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminPyAddAction" class="root.admin.PyAddAction" scope="prototype"
+		autowire="byType">
+	</bean>
+	<bean id="adminPyDelAction" class="root.admin.PyDelAction" scope="prototype"
+		autowire="byType">
+	</bean>
+	<bean id="adminPyQueryAction" class="root.admin.PyQueryAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminPyModifyAction" class="root.admin.PyModifyAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminNewsreleaseAction" class="root.admin.NewsReleaseAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminMajorRegAction" class="root.admin.MajorRegAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminMajorAddAction" class="root.admin.MajorAddAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminClassnoAddAction" class="root.admin.ClassnoAddAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminLwAddAction" class="root.admin.LwAddAction" scope="prototype"
+		autowire="byType">
+	</bean>
+	<bean id="adminLwDelAction" class="root.admin.LwDelAction" scope="prototype"
+		autowire="byType">
+	</bean>
+	<bean id="adminViews1Action" class="root.admin.Views1Action"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminViews2Action" class="root.admin.Views2Action"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminViews3Action" class="root.admin.Views3Action"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminViews4Action" class="root.admin.Views4Action"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminViews5Action" class="root.admin.Views5Action"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminViews6Action" class="root.admin.Views6Action"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminViews7Action" class="root.admin.Views7Action"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminStudentPreviewInfoAction" class="root.admin.studentPreviewInfoAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminTeacherRegAction" class="root.admin.TeacherRegAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminSubInfoManageAction" class="root.admin.SubInfoManageAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminStudentInfoAction" class="root.admin.studentInfoAction"
+		scope="prototype" autowire="byType">
+	</bean>
+		<bean id="adminStudentInfoModAction" class="root.admin.StudentInfoModAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminSubAssignedInfoAction" class="root.admin.SubAssignedInfoAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminSubAssignedDelAction" class="root.admin.SubAssignedDelAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminSubAssignInfoAction" class="root.admin.SubAssignInfoAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminStudentAssignDetailAction" class="root.admin.StudentAssignDetailAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminSubAssignDetailAction" class="root.admin.SubAssignDetailAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminSubAssignDelAction" class="root.admin.SubAssignDelAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminTeacherInfoAction" class="root.admin.TeacherInfoAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminTeacherInfoModAction" class="root.admin.TeacherInfoModAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminMajorDelAction" class="root.admin.MajorDelAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminClassnoDelAction" class="root.admin.ClassnoDelAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminSubAssignAction" class="root.admin.SubAssignAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminAssignSubject" class="root.admin.AdminAssignSubject"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminAssignAutoAction" class="root.admin.AssignAutoAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="PrintManageAction" class="root.admin.PrintManageAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="StudentPercentAction" class="root.admin.StudentPercentAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="adminChangePasswordAction" class="root.ChangePasswordAction"
+		scope="prototype">
+		<property name="adminDAO" ref="AdministratorDAO" />
+	</bean>
+	<bean id="adminPropertyAction" class="root.admin.AdminPropertyAction"
+		scope="prototype" autowire="byType">
+	</bean>
+</beans>

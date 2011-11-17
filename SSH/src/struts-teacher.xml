@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="teacher" namespace="/teacher" extends="struts-default">
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<interceptor name="teacherSecurityInterceptor" class="teacherSecurityInterceptor" />
+			<interceptor-stack name="teacherInterceptor">
+				<interceptor-ref name="teacherSecurityInterceptor" />
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="teacherInterceptor" />
+		<!-- 配置全局结果、映射 -->
+		<global-results>
+			<result name="login">/teacher/login.jsp</result>
+			<result name="exception">/errorpage/globalexceptionerror.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<!-- 教室登陆 -->
+		<action name="teacherLogin" class="teacherLoginAction">
+			<interceptor-ref name="defaultStack">
+				<param name="exception.logEnabled">true</param>
+				<param name="exception.logLevel">ERROR</param>
+			</interceptor-ref>
+			<result type="redirect">/teacher/main.jsp</result>
+			<result name="input">/teacher/login.jsp</result>
+			<result name="invalid.token">/errorpage/resubmit.jsp</result>
+		</action>
+		<!-- 修改个人信息 -->
+		<action name="teacherMod" class="teaTeacherModAction">
+			<result>/teacher/teacherMod.jsp</result>
+			<result name="teachermod">/teacher/main.jsp</result>
+			<result name="error">/teacher/error.jsp</result>
+		</action>
+		<!-- 注册新的课题 -->
+		<action name="subReg" class="teaSubRegAction">
+			<result>/teacher/subReg.jsp</result>
+			<result name="querysuccess">/teacher/main.jsp</result>
+			<result name="error">/errorpage/subReg.jsp</result>
+			<result name="wrong">/teacher/error.jsp</result>
+		</action>
+		<!-- 课题分配信息管理 -->
+		<action name="subAssign" class="teaSubAssignAction">
+			<result>/teacher/subAssign.jsp</result>
+			<result name="excel">/teacher/subAssignExcel.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="viewStudent">/teacher/teacherStudent.jsp</result>
+			<result name="deletesuccess" type="redirectAction">
+				<param name="actionName">subAssign</param>
+				<param name="namespace">/teacher</param>
+			</result>
+			<result name="wrong">/teacher/error.jsp</result>
+		</action>
+		<!-- 文档管理 -->
+		<action name="fileManage" class="teaFileManageAction">
+			<result>/teacher/fileManage.jsp</result>
+			<result name="error">/errorpage/fileManage.jsp</result>
+		</action>
+		<!-- 中期检查 -->
+		<action name="teaMidternCheck" class="teaMidternCheckAction">
+			<result>/teacher/midternCheck.jsp</result>
+			<result name="error">/errorpage/midternCheck.jsp</result>
+		</action>
+		<action name="teacherSetRemark" class="teacherSetRemarkAction">
+			<result>/teacher/teacherSetRemark.jsp</result>
+			<result name="error">/errorpage/teacherSetRemark.jsp</result>
+			<result name="excutesuccess" type="redirectAction">
+				<param name="actionName">teaMidternCheck</param>
+				<param name="namespace">/teacher</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">teaMidternCheck</param>
+				<param name="namespace">/teacher</param>
+			</result>
+		</action>
+		<!--查看学生预选情况并选择分配 -->
+		<action name="preview" class="teaPreviewAction">
+			<result>/teacher/preview.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="selectsuccess" type="redirectAction">
+				<param name="actionName">preview</param>
+				<param name="namespace">/teacher</param>
+			</result>
+			<result name="wrong">/teacher/error.jsp</result>
+		</action>
+		<action name="subReassign" class="teaSubReassignAction">
+			<result>/teacher/subReassign.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+		</action>
+		<action name="subnameMod" class="teaSubnameModAction">
+			<result>/teacher/subnameMod.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="querysuccess">/teacher/subnameMod2.jsp</result>
+			<result name="changesuccess">/teacher/main.jsp</result>
+			<result name="wrong">/teacher/error.jsp</result>
+		</action>
+
+		<!-- 教师管理课题 -->
+		<action name="subResult" class="teaSubResultAction">
+			<result>/teacher/subResult.jsp</result>
+			<result name="excel">/teacher/subResultExcel.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="DELSUCCESS" type="redirectAction">
+				<param name="actionName">subResult</param>
+				<param name="namespace">/teacher</param>
+			</result>
+			<result name="subupdate">/teacher/subjectUpdate.jsp</result>
+		</action>
+		<action name="subjectUpdate" class="teaSubjectUpdateAction">
+			<result>/teacher/subjectUpdate.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+		</action>
+		<!-- 教师为学生打分 -->
+		<action name="gradeInput" class="teaGradeInputAction">
+			<result name="exsucc">/teacher/gradeInput3.jsp</result>
+			<result name="querysuccess">/teacher/gradeInput.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="selectsuccess">/teacher/gradeInput2.jsp</result>
+			<result name="pyinfosuccess" type="chain">
+				<param name="actionName">gradeInput</param>
+				<param name="method">query</param>
+				<param name="namespace">/teacher</param>
+			</result>
+			<result name="in" type="chain">
+				<param name="actionName">gradeInput</param>
+				<param name="method">query</param>
+				<param name="namespace">/teacher</param>
+			</result>
+		</action>
+		<!-- 教师分数拆分 -->
+		<action name="gradeSplit" class="teaGradeSplitAction">
+			<result>/teacher/main.jsp</result>
+			<result name="querysuccess">/teacher/gradeSplit.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="selectsuccess">/teacher/gradeSplit2.jsp</result>
+		</action>
+		<!-- 打印管理 -->
+		<action name="printManage" class="teaPrintManageAction">
+			<result>/teacher/printManage.jsp</result>
+			<result name="viewStudent">/teacher/pingyu.jsp</result>
+			<result name="error">/teacher/error.jsp</result>
+		</action>
+		<action name="gradeSplitAll" class="teaGradeSplitAll">
+			<result>/teacher/main.jsp</result>
+		</action>
+		<action name="teacherPassword" class="teacherChangePasswordAction">
+			<result name="teacherquery">/teacher/teacherChangePassword.jsp</result>
+			<result name="error">/errorpage/globalexceptionerror.jsp</result>
+			<result name="setPasswordWrong">/teacher/error.jsp</result>
+			<result name="setTeacherPasswordSuccess">/teacher/main.jsp</result>
+		</action>
+	</package>
+</struts>

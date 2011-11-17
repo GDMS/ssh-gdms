@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="anonymous" namespace="/anonymous" extends="struts-default">
+		<!-- 配置全局结果、映射 -->
+		<global-results>
+			<result name="exception">/errorpage/globalexceptionerror.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<!-- 学生注册 -->
+		<action name="studentReg" class="anyStudentRegAction">
+			<result>/anonymous/studentRegSuccess.jsp</result>
+			<result name="input">/anonymous/studentRegDuplicated.jsp</result>
+			<result name="querySuccess">/anonymous/studentReg.jsp</result>
+		</action>
+		<!-- 找回密码 -->
+		<action name="studentForgetPassword" class="studentForgetPasswordAction">
+			<result>/anonymous/studentForgetPassword.jsp</result>
+			<result name="input">/anonymous/studentForgetPassword.jsp</result>
+		</action>
+		<action name="teacherForgetPassword" class="teacherForgetPasswordAction">
+			<result>/anonymous/teacherForgetPassword.jsp</result>
+			<result name="input">/anonymous/teacherForgetPassword.jsp</result>
+		</action>
+		<!-- 教师信息 -->
+		<action name="teacherInfo" class="teacherInfoAction">
+			<result>/anonymous/teacherInfo.jsp</result>
+		</action>
+	</package>
+</struts>

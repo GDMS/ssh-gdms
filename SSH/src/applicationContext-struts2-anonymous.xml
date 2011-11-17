@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="anyStudentRegAction" class="root.anonymous.StudentRegAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="studentForgetPasswordAction" class="root.anonymous.ForgetPasswordAction">
+		<property name="mailSender" ref="mailSender" />
+		<property name="templateMessage" ref="templateMessage" />
+		<property name="studentDAO" ref="StudentDAO" />
+	</bean>
+	<bean id="teacherForgetPasswordAction" class="root.anonymous.ForgetPasswordAction">
+		<property name="mailSender" ref="mailSender" />
+		<property name="templateMessage" ref="templateMessage" />
+		<property name="teacherDAO" ref="TeacherDAO" />
+	</bean>
+	<bean id="teacherInfoAction" class="root.anonymous.TeacherInfoAction"
+		scope="prototype" autowire="byType">
+	</bean>
+</beans>

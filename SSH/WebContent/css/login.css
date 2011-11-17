@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+
+#login {
+	background: url(images/login/bg.png) no-repeat;
+	background-position: center;
+}
+
+#student {
+	background: url(images/login/Slogin.png) no-repeat;
+}
+
+#teacher {
+	background: url(images/login/Tlogin.png) no-repeat;
+}
+
+#admin {
+	background: url(images/login/Alogin.png) no-repeat;
+}
+
+.box {
+	float: right;
+	padding-top: 10;
+	width: 440;
+	height: 315px;
+}
+
+.box .user_main_text {
+	LINE-HEIGHT: 34px;
+	HEIGHT: 34px;
+	font-size: 0.9em;
+	color: #11449E;
+	border: 0px solid #000;
+	padding-left: 15px;
+}
+
+.box .user_main_input {
+	LINE-HEIGHT: 34px;
+	HEIGHT: 34px;
+	vertical-align: top;
+}
+
+.TxtUserNameCssClass {
+	BORDER-TOP-WIDTH: 0px;
+	PADDING-LEFT: 25px;
+	BORDER-LEFT-WIDTH: 0px;
+	BACKGROUND: url(images/login/user_login_name.png) no-repeat;
+	BORDER-BOTTOM-WIDTH: 0px;
+	WIDTH: 165px;
+	LINE-HEIGHT: 20px;
+	HEIGHT: 21px;
+	BORDER-RIGHT-WIDTH: 0px;
+	margin-top: 6px;
+}
+
+.TxtPassWordCssClass {
+	BORDER-TOP-WIDTH: 0px;
+	PADDING-LEFT: 25px;
+	BORDER-LEFT-WIDTH: 0px;
+	BACKGROUND: url(images/login/user_login_password.png) no-repeat;
+	BORDER-BOTTOM-WIDTH: 0px;
+	WIDTH: 165px;
+	LINE-HEIGHT: 20px;
+	HEIGHT: 21px;
+	BORDER-RIGHT-WIDTH: 0px;
+	margin-top: 6px;
+}
+
+.pw_forget {
+	font-size: 13px;
+	padding-left: 150px;
+}
+
+.student_pw_forget {
+	font-size: 13px;
+	padding-left: 42px;
+}
+
+.student_Reg {
+	font-size: 13px;
+	padding-left: 80px;
+}
+
+.botton {
+}

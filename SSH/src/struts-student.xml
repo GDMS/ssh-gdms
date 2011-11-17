@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="student" namespace="/student" extends="struts-default">
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<interceptor name="studentSecurityInterceptor" class="studentSecurityInterceptor" />
+			<interceptor-stack name="studentInterceptor">
+				<interceptor-ref name="studentSecurityInterceptor" />
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">WARN</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="studentInterceptor" />
+		<!-- 配置全局结果、映射 -->
+		<global-results>
+			<result name="login">/student/login.jsp</result>
+			<result name="exception">/errorpage/globalexceptionerror.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<!-- 学生登录 -->
+		<action name="studentLogin" class="stuStudentLoginAction">
+			<interceptor-ref name="defaultStack">
+				<param name="exception.logEnabled">true</param>
+				<param name="exception.logLevel">ERROR</param>
+			</interceptor-ref>
+			<result type="redirect">/student/main.jsp</result>
+			<result name="input">/student/login.jsp</result>
+			<result name="invalid.token">/errorpage/resubmit.jsp</result>
+		</action>
+		<!-- 课程指派 -->
+		<action name="subAssign" class="stuSubAssignAction">
+			<result>/student/subAssign.jsp</result>
+			<result name="input">/student/login.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="subname">/student/subnameMod.jsp</result>
+			<result name="studentmod">/student/studentMod.jsp</result>
+		</action>
+		<action name="subNameMod" class="stuSubNameModAction">
+			<result>/student/main.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<!-- 选择课程 -->
+		<action name="subChoose" class="stuSubChooseAction">
+			<result name="querySuccess">/student/subChoose.jsp</result>
+			<result name="error">/student/error.jsp</result>
+			<result name="selectSuccess">/student/subChoose2.jsp</result>
+			<result>/student/subChoose3.jsp</result>
+		</action>
+		<!-- 预选课程选择 -->
+		<action name="subResult" class="stuSubResultAction">
+			<result>/student/subResult.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="null">/student/subResult2.jsp</result>
+			<result name="DELSUCCESS" type="redirectAction">
+				<param name="actionName">subResult</param>
+				<param name="namespace">/student</param>
+			</result>
+			<result name="MOVESUCCESS" type="redirectAction">
+				<param name="actionName">subResult</param>
+				<param name="namespace">/student</param>
+			</result>
+			<result name="MOVEFAILED" type="redirect">/student/subResult3.jsp
+			</result>
+		</action>
+		<!-- 修改个人信息 -->
+		<action name="studentMod" class="stuStudentModAction">
+			<result>/student/studentMod.jsp</result>
+			<result name="studentmod">/student/main.jsp</result>
+			<result name="error">error.jsp</result>
+
+		</action>
+		<!-- 输入答辩信息 -->
+		<action name="qaInput" class="stuQaInputAction">
+			<result>/student/QAInput.jsp</result>
+			<result name="input">/student/login.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="qainput">/student/QAInput.jsp</result>
+		</action>
+		<!--论文提交 -->
+		<action name="thesisUp" class="stuThesisUpAction">
+			<result>/student/thesisUp.jsp</result>
+			<result name="input">/student/thesisUp.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<!--开题报告提交 -->
+		<action name="ktreportUp" class="stuKtreportUpAction">
+			<result>/student/kt-reportUp.jsp</result>
+			<result name="input">/student/kt-reportUp.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<!--任务书提交 -->
+		<action name="assignmentUp" class="stuAssignmentUpAction">
+			<result>/student/assignmentUp.jsp</result>
+			<result name="input">/student/assignmentUp.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<!--翻译资料提交 -->
+		<action name="translateUp" class="stuTranslateUpAction">
+			<result>/student/translateUp.jsp</result>
+			<result name="input">/student/translateUp.jsp</result>
+			<result name="error">error.jsp</result>
+		</action>
+		<!-- 中期自检 -->
+		<action name="midternCheck" class="stuMidternCheckAction">
+			<result>/student/main.jsp</result>
+			<result name="error">error.jsp</result>
+			<result name="query">/student/midternCheck.jsp</result>
+		</action>
+		<action name="studentPassword" class="studentChangePasswordAction">
+			<result name="studentquery">/student/studentChangePassword.jsp</result>
+			<result name="error">/errorpage/globalexceptionerror.jsp</result>
+			<result name="setPasswordWrong">/student/error.jsp</result>
+			<result name="setStudentPasswordSuccess">/student/main.jsp</result>
+		</action>
+	</package>
+</struts>

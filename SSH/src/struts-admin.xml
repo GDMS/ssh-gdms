@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="admin" namespace="/admin" extends="struts-default">
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<interceptor name="adminSecurityInterceptor" class="adminSecurityInterceptor" />
+			<interceptor-stack name="adminInterceptor">
+				<interceptor-ref name="adminSecurityInterceptor" />
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="adminInterceptor" />
+		<!-- 配置全局结果、映射 -->
+		<global-results>
+			<result name="login">/admin/login.jsp</result>
+			<result name="exception">/errorpage/globalexceptionerror.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		<!-- 管理员登录 -->
+		<action name="adminLogin" class="adminLoginAction">
+			<interceptor-ref name="defaultStack">
+				<param name="exception.logEnabled">true</param>
+				<param name="exception.logLevel">ERROR</param>
+			</interceptor-ref>
+			<result type="redirect">/admin/main.jsp</result>
+			<result name="input">/admin/login.jsp</result>
+		</action>
+		<!-- 评语管理 -->
+		<action name="pyManage" class="adminPyManageAction">
+			<result>/admin/pyManage.jsp</result>
+			<result name="input">/admin/login.jsp</result>
+		</action>
+		<!-- 评语增加 -->
+		<action name="pyAdd" class="adminPyAddAction">
+			<result>/admin/pyManage.jsp</result>
+			<result name="input">/admin/login.jsp</result>
+		</action>
+		<!-- 评语删除 -->
+		<action name="pyDel" class="adminPyDelAction">
+			<result>/admin/pyManage.jsp</result>
+			<result name="input">/admin/login.jsp</result>
+		</action>
+		<!-- 评语查询 -->
+		<action name="pyQuery" class="adminPyQueryAction">
+			<result>/admin/pyQuery.jsp</result>
+			<result name="input">/admin/login.jsp</result>
+		</action>
+		<!-- 评语修改 -->
+		<action name="pyModify" class="adminPyModifyAction">
+			<result>/admin/pyModify.jsp</result>
+			<result name="input">/admin/login.jsp</result>
+		</action>
+		<!-- 管理专业班级 -->
+		<action name="majorReg" class="adminMajorRegAction">
+			<result>/admin/majorReg.jsp</result>
+			<result name="input">/admin/majorReg.jsp</result>
+		</action>
+		<!-- 新增专业 -->
+		<action name="majorAdd" class="adminMajorAddAction">
+			<result>/admin/majorAdd.jsp</result>
+			<result name="input">/admin/majorAdd.jsp</result>
+			<result name="majorsuccess">/admin/majorReg.jsp</result>
+		</action>
+		<!-- 新增班级 -->
+		<action name="classnoAdd" class="adminClassnoAddAction">
+			<result>/admin/classAdd.jsp</result>
+			<result name="input">/admin/classAdd.jsp</result>
+			<result name="addSuccess">/admin/majorReg.jsp</result>
+		</action>
+		<!-- 删除专业 -->
+		<action name="majorDel" class="adminMajorDelAction">
+			<result>/admin/majorDel.jsp</result>
+			<result name="input">/admin/majorReg.jsp</result>
+			<result name="majorsuccess">/admin/majorReg.jsp</result>
+		</action>
+		<!-- 删除班级 -->
+		<action name="classnoDel" class="adminClassnoDelAction">
+			<result>/admin/classDel.jsp</result>
+			<result name="input">/admin/majorReg.jsp</result>
+			<result name="delSuccess">/admin/majorReg.jsp</result>
+		</action>
+
+		<!-- 发布信息 -->
+		<action name="newsRelease" class="adminNewsreleaseAction">
+			<result>/admin/newsRelease.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="changesuccess">/admin/main.jsp</result>
+		</action>
+		<!-- 添加优秀论文 -->
+		<action name="lwAdd" class="adminLwAddAction">
+			<result>/admin/lwManage.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="input">/admin/lwAdd.jsp</result>
+		</action>
+		<!-- 删除优秀论文 -->
+		<action name="lwDel" class="adminLwDelAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/lwDel.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+		</action>
+		<!-- 差生分配结果视图 -->
+		<action name="views1" class="adminViews1Action">
+			<result>/admin/views1.jsp</result>
+			<result name="excel">/admin/views1Excel.jsp</result>
+		</action>
+		<!-- 差生差生预选情况视图 -->
+		<action name="views2" class="adminViews2Action">
+			<result>/admin/views2.jsp</result>
+			<result name="excel">/admin/views2Excel.jsp</result>
+		</action>
+		<!-- 教师指导学生名单视图 -->
+		<action name="views3" class="adminViews3Action">
+			<result>/admin/views3.jsp</result>
+			<result name="excel">/admin/views3Excel.jsp</result>
+		</action>
+		<!-- 教师指导学生数视图 -->
+		<action name="views4" class="adminViews4Action">
+			<result>/admin/views4.jsp</result>
+			<result name="excel">/admin/views4Excel.jsp</result>
+		</action>
+		<!-- 未分配学生数视图 -->
+		<action name="views5" class="adminViews5Action">
+			<result>/admin/views5.jsp</result>
+			<result name="excel">/admin/views5Excel.jsp</result>
+		</action>
+		<!-- 学生预选信息视图 -->
+		<action name="views6" class="adminViews6Action">
+			<result>/admin/views6.jsp</result>
+			<result name="excel">/admin/views6Excel.jsp</result>
+		</action>
+		<!-- 学生毕业设计成绩信息视图 -->
+		<action name="views7" class="adminViews7Action">
+			<result>/admin/views7.jsp</result>
+			<result name="excel">/admin/views7Excel.jsp</result>
+		</action>
+		<!-- 管理学生预选信息 -->
+		<action name="studentPreviewInfo" class="adminStudentPreviewInfoAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/studentPreviewInfo.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="studentdetail">/admin/studentPreviewDetail.jsp</result>
+			<result name="thesisDetail">/admin/subPreviewDetail.jsp</result>
+			<result name="deletequery">/admin/studentPreviewDel.jsp</result>
+			<result name="excel">/admin/studentPreviewInfoExcel.jsp</result>
+		</action>
+		<!-- 教师注册 -->
+		<action name="teacherReg" class="adminTeacherRegAction">
+			<result>/admin/teacherReg.jsp</result>
+			<result name="querysuccess">/admin/main.jsp</result>
+			<result name="error">/errorpage/teacherReg.jsp</result>
+		</action>
+		<!-- 管理学生信息 -->
+		<action name="studentInfo" class="adminStudentInfoAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/studentInfoManage.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="deletequery">/admin/studentInfoDel.jsp</result>
+			<result name="excel">/admin/studentInfoExcel.jsp</result>
+		</action>
+		<!-- 修改学生信息 -->
+		<action name="studentInfoMod" class="adminStudentInfoModAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/studentInfoMod.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+		</action>
+		<!-- 管理教师信息 -->
+		<action name="teacherInfo" class="adminTeacherInfoAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/teacherInfoManage.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="deletequery">/admin/teacherInfoDel.jsp</result>
+			<result name="my">/admin/subResult.jsp</result>
+			<result name="excel">/admin/teacherInfoExcel.jsp</result>
+		</action>
+		<!-- 修改教师信息 -->
+		<action name="teacherInfoMod" class="adminTeacherInfoModAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/teacherInfoMod.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+		</action>
+		<!-- 管理课题信息 -->
+		<action name="subInfoManage" class="adminSubInfoManageAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/subInfoManage.jsp</result>
+			<result name="error">/errorpage/resubmit.jsp</result>
+			<result name="deletequery">/admin/subInfoDel.jsp</result>
+			<result name="my">/admin/subResult.jsp</result>
+			<result name="excel">/admin/subInfoExcel.jsp</result>
+		</action>
+		<!-- 管理已分配信息 -->
+		<action name="subAssignedInfo" class="adminSubAssignedInfoAction">
+			<result>/admin/subAssignedInfo.jsp</result>
+			<result name="error">/errorpage/teacherReg.jsp</result>
+			<result name="excel">/admin/subAssignedInfoExcel.jsp</result>
+		</action>
+		<!-- 删除已分配信息 -->
+		<action name="subAssignedDel" class="adminSubAssignedDelAction">
+			<result name="querysuccess">/admin/subAssignedDel.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">subAssignedInfo</param>
+				<param name="namespace">/admin</param>
+			</result>
+			<result name="error">/errorpage/teacherReg.jsp</result>
+		</action>
+		<!-- 管理学生分配信息 -->
+		<action name="subAssignInfo" class="adminSubAssignInfoAction">
+			<result>/admin/subAssignInfo.jsp</result>
+			<result name="error">/errorpage/teacherReg.jsp</result>
+			<result name="excel">/admin/subAssignExcel.jsp</result>
+		</action>
+		<!-- 查看学生详细信息 -->
+		<action name="studentAssignDetail" class="adminStudentAssignDetailAction">
+			<result>/admin/studentAssignDetail.jsp</result>
+			<result name="error">/errorpage/teacherReg.jsp</result>
+			<result name="wrong">/admin/error.jsp</result>
+		</action>
+		<!-- 查看课题详细信息 -->
+		<action name="subAssignDetail" class="adminSubAssignDetailAction">
+			<result>/admin/subAssignDetail.jsp</result>
+			<result name="error">/errorpage/teacherReg.jsp</result>
+			<result name="wrong">/admin/error.jsp</result>
+		</action>
+		<!-- 删除课题详细信息 -->
+		<action name="subAssignDel" class="adminSubAssignDelAction">
+			<result name="querysuccess">/admin/subAssignDel.jsp</result>
+			<result name="wrong">/admin/error.jsp</result>
+			<result type="redirectAction">
+				<param name="actionName">subAssignInfo</param>
+				<param name="namespace">/admin</param>
+			</result>
+		</action>
+		<action name="subAssign" class="adminSubAssignAction">
+			<result name="querysuccess">/admin/subAssign.jsp</result>
+		</action>
+		<action name="assignSubject" class="adminAssignSubject">
+			<result type="redirectAction">
+				<param name="actionName">subAssignInfo</param>
+				<param name="namespace">/admin</param>
+			</result>
+		</action>
+		<!-- 自动分配 -->
+		<action name="assignAuto" class="adminAssignAutoAction">
+			<!-- <result type="chain"> <param name="actionName">assignAuto</param> 
+				<param name="namespace">/admin</param> <param name="method">query</param> 
+				</result> -->
+			<result>/admin/assignAuto.jsp</result>
+			<result name="querysuccess">/admin/assignAutoInfo.jsp</result>
+		</action>
+		<action name="printManage" class="PrintManageAction">
+			<result name="admin">/admin/printManage.jsp</result>
+			<result name="viewStudent">/admin/pingyu.jsp</result>
+			<result name="wrong">/admin/error.jsp</result>
+		</action>
+		<!--预选比例 -->
+		<action name="studentPercent" class="StudentPercentAction">
+			<result>/admin/main.jsp</result>
+			<result name="querysuccess">/admin/studentPercent.jsp</result>
+			<result name="wrong">/admin/error.jsp</result>
+			<result name="input">/admin/studentPercent.jsp</result>
+		</action>
+		<action name="adminPassword" class="adminChangePasswordAction">
+			<result name="adminquery">/admin/adminChangePassword.jsp</result>
+			<result name="error">/errorpage/globalexceptionerror.jsp</result>
+			<result name="setPasswordWrong">/admin/error.jsp</result>
+			<result name="setAdminPasswordSuccess">/admin/main.jsp</result>
+		</action>
+		<!-- 修改后台属性 -->
+		<action name="adminProperty" class="adminPropertyAction">
+			<result type="redirectAction">
+				<param name="actionName">adminPropertyQuery</param>
+				<param name="namespace">/admin</param>
+			</result>
+		</action>
+		<action name="adminPropertyQuery" class="adminPropertyAction"
+			method="query">
+			<result>/admin/property.jsp</result>
+		</action>
+	</package>
+</struts>

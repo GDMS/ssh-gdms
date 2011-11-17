@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="teacherLoginAction" class="root.teacher.TeacherLoginAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaTeacherModAction" class="root.teacher.TeacherModAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaSubRegAction" class="root.teacher.SubRegAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaSubAssignAction" class="root.teacher.SubAssignAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaFileManageAction" class="root.teacher.FileManageAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaMidternCheckAction" class="root.teacher.TeaMidternCheckAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teacherSetRemarkAction" class="root.teacher.TeacherSetRemarkAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaPreviewAction" class="root.teacher.PreviewAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaSubReassignAction" class="root.teacher.SubReassignAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaSubnameModAction" class="root.teacher.SubnameModAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaSubResultAction" class="root.teacher.SubResultAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaSubjectUpdateAction" class="root.teacher.SubjectUpdateAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaGradeInputAction" class="root.teacher.GradeInputAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaGradeSplitAction" class="root.teacher.GradeSplitAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaPrintManageAction" class="root.teacher.PrintManageAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teaGradeSplitAll" class="root.teacher.GradeSplitAllAction"
+		scope="prototype" autowire="byType">
+	</bean>
+	<bean id="teacherChangePasswordAction" class="root.ChangePasswordAction"
+		scope="prototype">
+		<property name="teacherDAO" ref="TeacherDAO" />
+	</bean>
+</beans>

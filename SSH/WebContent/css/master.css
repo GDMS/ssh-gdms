@@ -1,0 +1,184 @@
+#title {
+	height: 30px;
+	valign: middle;
+	align: left;
+	color: #ff8800;
+	font-size: 20px;
+	padding-top: 10px;
+	padding-left: 0px;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+
+#info {
+	color: #666666;
+	font-size: 13px;
+	padding-left: 0px;
+}
+
+#box {
+	background: #C7D4E4;
+	padding: 15px;
+}
+
+.tdLabel {
+	color: #1C3A59;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: middle;
+	text-align: center;
+	width: 250px;
+	height: 25px;
+	border: 0px solid #000;
+	width: 250px;
+}
+
+.textfield_label {
+	color: #1C3A59;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: top;
+	width: 170px;
+	height: 25px;
+	border: 0px solid #000;
+}
+
+.textfield_label2 {
+	color: #1C3A59;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: top;
+	height: 20px;
+	border: 0px solid #000;
+}
+
+.textfield {
+	vertical-align: middle;
+	margin-bottom: 10px;
+	margin-top: -2px;
+	width: 200px;
+}
+
+.textfield2 {
+	vertical-align: middle;
+	margin-bottom: 10px;
+	margin-top: -2px;
+	width: 100px;
+}
+
+.radio_label {
+	color: #1C3A59;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: middle;
+	width: 120px;
+	height: 25px;
+	border: 0px solid #000;
+}
+
+.radio {
+	vertical-align: middle;
+	margin-bottom: 10px;
+	margin-top: 8px;
+}
+
+.select_label {
+	color: #1C3A59;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: right;
+	vertical-align: middle;
+	width: 120px;
+	height: 31px;
+	border: 0px solid #000;
+}
+
+.select {
+	margin-top: 0px;
+	margin-right: -2px;
+	border: 0px solid #000;
+}
+
+}
+.select1 {
+	vertical-align: middle;
+}
+
+.select2 {
+	vertical-align: middle;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#sex {
+	
+}
+
+#sex label {
+	font-size: 11px;
+}
+
+#cue {
+	width: 200;
+}
+
+.tableHeading {
+	COLOR: #1C3A59;
+	font-weight: bold;
+	BACKGROUND-COLOR: #C7D4E4;
+	vertical-align: middle;
+	height: 28px;
+	font-size: 14px;
+	text-align: left;
+	padding-left: 5px;
+}
+
+.tableInfo {
+	padding: 5px;
+	COLOR: slategray;
+	font-size: 13px;
+}
+
+.tableTop {
+	text-align: center;
+	COLOR: #1C3A59;
+	font-weight: bold;
+	BACKGROUND-COLOR: #C7D4E4;
+	vertical-align: middle;
+	height: 25px;
+	font-size: 13px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.tableDetail {
+	text-align: center;
+	background: #dcdcdc;
+	font-size: 13px;
+	font-weight: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 20px;
+}
+
+.tableDetail a {
+	text-align: center;
+	background: #dcdcdc;
+	font-size: 13px;
+	font-weight: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 20px;
+}
+
+.partscores {
+	width: 100px;
+}
+
+.parts {
+	width: 100px;
+}

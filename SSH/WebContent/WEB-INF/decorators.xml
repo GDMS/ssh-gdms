@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<decorators defaultdir="/_decorators">
+	<excludes>
+		<pattern>/css/*</pattern>
+		<pattern>/images/*</pattern>
+		<pattern>/include/*</pattern>
+		<pattern>/upload/*</pattern>
+	</excludes>
+	<decorator name="default" page="default-decorator.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	<decorator name="printable" page="printable.jsp">
+	</decorator>
+</decorators>

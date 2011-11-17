@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.maxSize" value="10485760" />
+	<package name="default" extends="struts-default">
+		<!-- 
+		<global-results>
+			<result name="exception">/errorpage/globalexceptionerror.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="exception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>配置全局结果、映射 -->
+		<!-- 主页 -->
+		
+		<action name="logout" class="logoutAction">
+			<result type="redirect">/logout.jsp</result>
+		</action>
+		<action name="index" class="indexAction">
+			<result>/indexnews.jsp</result>
+		</action>
+	</package>
+
+	<include file="struts-student.xml"></include>
+	<include file="struts-teacher.xml"></include>
+	<include file="struts-admin.xml"></include>
+	<include file="struts-json.xml"></include>
+	<include file="struts-anonymous.xml"></include>
+</struts>

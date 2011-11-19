@@ -251,6 +251,7 @@
 				</result> -->
 			<result>/admin/assignAuto.jsp</result>
 			<result name="querysuccess">/admin/assignAutoInfo.jsp</result>
+			<result name="excel">/admin/assignAutoExcel.jsp</result>
 		</action>
 		<action name="printManage" class="PrintManageAction">
 			<result name="admin">/admin/printManage.jsp</result>

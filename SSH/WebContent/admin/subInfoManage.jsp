@@ -10,6 +10,7 @@
 	</head>
 
 	<body>
+	<script type="text/javascript" src="admin/subInfo.js"></script>
 	<script type="text/javascript" src="/admin/excel.js"></script>
 		
 		<br>

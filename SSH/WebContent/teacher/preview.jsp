@@ -9,7 +9,7 @@
 	</head>
 
 	<body>
-		<script type="text/javascript" src="admin/subAssignInfo.js"></script>
+		<script type="text/javascript" src="teacher/preview.js"></script>
 		<table align="center" width="740px" border="0px">
 			<tr valign="top">
 				<td id="title">

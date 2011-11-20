@@ -28,7 +28,7 @@
 				<param name="exception.logEnabled">true</param>
 				<param name="exception.logLevel">ERROR</param>
 			</interceptor-ref>
-			<result type="redirect">/teacher/main.jsp</result>
+			<result>/teacher/main.jsp</result>
 			<result name="input">/teacher/login.jsp</result>
 			<result name="invalid.token">/errorpage/resubmit.jsp</result>
 		</action>

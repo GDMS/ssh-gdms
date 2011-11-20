@@ -103,15 +103,9 @@ public class TeacherLoginAction extends ActionSupport {
 
 	@Override
 	public void validate() {
-		// 关闭后台用户名密码校验
-		// if(log.isDebugEnabled())
-		// return;
-		// String name = teacher.getName();
-		// String password =teacher.getPassword();
-		// if (name.length() ==0)
-		// addFieldError("teacher.name", "输入用户名为空");
-		// if (password.length() < 6)
-		// addFieldError("teacher.password", "输入的密码长度小于6位");
+		if (teacher == null) {
+			addActionError("没有输入数据！");
+		}
 	}
 
 	public void setTeacherDAO(TeacherDAO teacherDAO) {

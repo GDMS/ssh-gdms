@@ -15,9 +15,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Transactional(readOnly = true)
 public class StudentLoginAction extends ActionSupport {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6785412481737335717L;
 	/**
 	 * Log
@@ -65,15 +62,9 @@ public class StudentLoginAction extends ActionSupport {
 
 	@Override
 	public void validate() {
-		// 关闭后台用户名密码校验
-		// if(log.isDebugEnabled())
-		// return;
-		// String no = student.getNo();
-		// String password = student.getPassword();
-		// if (no.length() != 9)
-		// addFieldError("student.no", "输入的学号长度不是9位");
-		// if (password.length() < 6)
-		// addFieldError("student.password", "输入的密码长度小于6位");
+		if (student == null) {
+			addActionError("没有输入数据！");
+		}
 	}
 
 	public Student getStudent() {

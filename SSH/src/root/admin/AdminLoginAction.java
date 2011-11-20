@@ -3,6 +3,7 @@ package root.admin;
 import java.util.Map;
 import hibernate.tables.Administrator;
 import hibernate.tables.AdministratorDAO;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,21 +66,15 @@ public class AdminLoginAction extends ActionSupport {
 
 	@Override
 	public void validate() {
-		// 关闭后台用户名密码校验
-		// if(log.isDebugEnabled())
-		// return;
-		// String no = administrator.getName();
-		// String password = administrator.getPassword();
-		// if (no.length() != 9)
-		// addFieldError("administrator.no", "输入的学号长度不是9位");
-		// if (password.length() < 6)
-		// addFieldError("administrator.password", "输入的密码长度小于6位");
+		if (administrator == null) {
+			addActionError("没有输入数据！");
+		}
 	}
 
 	public Administrator getAdministrator() {
 		return administrator;
 	}
-	
+
 	public void setAdministrator(Administrator administrator) {
 		this.administrator = administrator;
 	}
@@ -89,4 +84,3 @@ public class AdminLoginAction extends ActionSupport {
 	}
 
 }
-

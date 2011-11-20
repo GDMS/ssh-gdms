@@ -70,9 +70,7 @@
 		<!-- 修改个人信息 -->
 		<action name="studentMod" class="stuStudentModAction">
 			<result>/student/studentMod.jsp</result>
-			<result name="studentmod">/student/main.jsp</result>
 			<result name="error">error.jsp</result>
-
 		</action>
 		<!-- 输入答辩信息 -->
 		<action name="qaInput" class="stuQaInputAction">

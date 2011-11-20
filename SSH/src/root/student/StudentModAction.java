@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import hibernate.tables.Major;
 import hibernate.tables.MajorDAO;
+import hibernate.tables.Property;
+import hibernate.tables.PropertyDAO;
 import hibernate.tables.StuClass;
 import hibernate.tables.StuClassDAO;
 import hibernate.tables.Student;
@@ -46,6 +48,8 @@ public class StudentModAction extends ActionSupport {
 	private StuClassDAO stuclassDAO;
 	@Autowired
 	private MajorDAO majorDAO;
+	@Autowired
+	private PropertyDAO propertyDAO;
 
 	private List<Major> major;
 	private Map<Integer, List<StuClass>> classname;
@@ -53,6 +57,9 @@ public class StudentModAction extends ActionSupport {
 	private int classno;
 	// private List<String> mjr;
 	// private List<String> cls;
+
+	// 是否允许修改全部信息
+	private boolean denyModAll;
 	/**
 	 * 通过自定义SecurityInterceptor拦截器获取
 	 */
@@ -64,24 +71,42 @@ public class StudentModAction extends ActionSupport {
 	@Override
 	@Transactional(readOnly = false)
 	public String execute() throws Exception {
+		// 获取后台参数
+		boolean allowModAll = false;
+		try {
+			Property p = propertyDAO.findByKey("StudentAllowModAll");
+			allowModAll = p.getValueB();
+		} catch (Exception e) {
+			log.warn(e.toString());
+		}
+		if (student == null)
+			return query();
+		String name = student.getName();
+		String gender = student.getGender();
+		Double credit = student.getCredit();
 
-		// String name = student.getName();
 		String phone = student.getPhone();
-		// String major =student.getName();
-		// String gender = student.getGender();
-		// Double credit = student.getCredit();
 		String email = student.getEmail();
-
 		student = studentDAO.findById(sessionId);
-		StuClass stuClass = stuclassDAO.findById(classno);
-		// student.setName(name);
 		student.setPhone(phone);
-		// student.setMajor(major);
-		//student.setStuClass(stuClass);
-		// student.setCredit(credit);
-		// student.setGender(gender);
 		student.setEmail(email);
-		return "studentmod";
+
+		if (allowModAll) {
+			student.setName(name);
+			StuClass stuClass = stuclassDAO.findById(classno);
+			student.setStuClass(stuClass);
+			student.setCredit(credit);
+			student.setGender(gender);
+			addActionMessage("学生信息修改成功！");
+		} else {
+			addActionMessage("修改成功，注意！\n姓名、性别、专业、班级、学分绩点的修改不会生效！");
+			addFieldError("student.name", "姓名的修改不会生效！");
+			addFieldError("student.gender", "性别的修改不会生效！");
+			addFieldError("student.major", "专业、班级的修改不会生效！");
+			addFieldError("student.credit", "学分绩点的修改不会生效！");
+		}
+
+		return query();
 	}
 
 	public String query() throws Exception {
@@ -132,44 +157,10 @@ public class StudentModAction extends ActionSupport {
 		this.student = student;
 	}
 
-	// /**
-	// * @return the major_
-	// */
-	// public List<Major> getMajor_() {
-	// return major_;
-	// }
-	//
-	// /**
-	// * @param major_
-	// * the major_ to set
-	// */
-	// public void setMajor_(List<Major> major_) {
-	// this.major_ = major_;
-	// }
-	//
-	// /**
-	// * @return the stuclassDAO
-	// */
-	// public StuClassDAO getStuclassDAO() {
-	// return stuclassDAO;
-	// }
-	//
-	// /**
-	// * @param stuclassDAO
-	// * the stuclassDAO to set
-	// */
 	public void setStuclassDAO(StuClassDAO stuclassDAO) {
 		this.stuclassDAO = stuclassDAO;
 	}
 
-	//
-	// /**
-	// * @return the majorDAO
-	// */
-	// public MajorDAO getMajorDAO() {
-	// return majorDAO;
-	// }
-	//
 	/**
 	 * @param majorDAO
 	 *            the majorDAO to set
@@ -222,6 +213,18 @@ public class StudentModAction extends ActionSupport {
 
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
+	}
+
+	public boolean isAllowModAll() {
+		return denyModAll;
+	}
+
+	public void setAllowModAll(boolean allowModAll) {
+		this.denyModAll = allowModAll;
+	}
+
+	public void setPropertyDAO(PropertyDAO propertyDAO) {
+		this.propertyDAO = propertyDAO;
 	}
 
 }

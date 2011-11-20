@@ -6,3 +6,4 @@
 6	教师预选第三志愿学生开始日期	PreviewSelectStart3		2011-11-16	
 7	允许教师选择学生最低绩点（包括）	CreditNotToChoose			1.2
 8	允许自动分配学生最低绩点（包括）	CreditNotToAssign			1.2
+9	允许学生修改全部个人信息	StudentAllowModAll	0		

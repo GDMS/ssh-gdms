@@ -155,9 +155,6 @@
 									<a href="student/subAssign.action">查看课题分配结果</a>
 								</li>
 								<li>
-									<a href="student/subAssign!query.action">更改课题名称</a>
-								</li>
-								<li>
 									<a href="student/kt-reportUp.jsp">开题报告提交</a>
 								</li>
 								<li>

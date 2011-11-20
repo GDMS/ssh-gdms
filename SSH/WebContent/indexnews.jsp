@@ -99,7 +99,7 @@
 											<hr SIZE="1">
 											<div>
 												&nbsp;&gt;&gt;&nbsp;
-												<a href="indexnews.jsp">管理员通知</a>
+												<a href="index.action">管理员通知</a>
 											</div>
 											<hr SIZE="1">
 										</marquee>

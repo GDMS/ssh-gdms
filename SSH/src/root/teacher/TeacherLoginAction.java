@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import hibernate.tables.News;
+import hibernate.tables.NewsDAO;
 import hibernate.tables.Property;
 import hibernate.tables.PropertyDAO;
 import hibernate.tables.Teacher;
@@ -20,27 +22,26 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Transactional(readOnly = true)
 public class TeacherLoginAction extends ActionSupport {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5780930845291823047L;
 	/**
 	 * Log
 	 */
 	private static final Log log = LogFactory.getLog(TeacherLoginAction.class);
 	/**
-	 * Sping依赖注入的DAO类.
+	 * Spring依赖注入的DAO类.
 	 */
 	@Autowired
 	private TeacherDAO teacherDAO;
+	@Autowired
+	private NewsDAO newsDao;
+	@Autowired
+	private PropertyDAO propertyDAO;
 
 	/**
 	 * 用于页面提交的Bean类
 	 */
 	private Teacher teacher;
-
-	@Autowired
-	private PropertyDAO propertyDAO;
+	private String message;
 
 	/**
 	 * 实现教师登录验证
@@ -49,6 +50,9 @@ public class TeacherLoginAction extends ActionSupport {
 	@Transactional(readOnly = false)
 	// FIXME 批量更新最大预选比例MaxAssign
 	public String execute() throws Exception {
+		News news = newsDao.findById(1);
+		message = news.getMsgToTea();
+		addActionMessage(message);
 		String name = teacher.getName();
 		String password = teacher.getPassword();
 		log.debug("教师号：" + name + "密码：" + password);
@@ -61,11 +65,13 @@ public class TeacherLoginAction extends ActionSupport {
 			return INPUT;
 		}
 		// 写入Session
+		String sessionNews = message;
 		String sessionName = teacher.getName();
 		String sessionType = "2";
 		String sessionId = teacher.getTeacherno();
 		byte[] sessionDigest = SecurityEx.getHash(sessionId, SecurityEx.SHA1);
 		Map<String, Object> session = ActionContext.getContext().getSession();
+		session.put("sessionNews", sessionNews);
 		session.put("sessionName", sessionName);
 		session.put("sessionType", sessionType);
 		session.put("sessionId", sessionId);
@@ -122,5 +128,21 @@ public class TeacherLoginAction extends ActionSupport {
 
 	public void setPropertyDAO(PropertyDAO propertyDAO) {
 		this.propertyDAO = propertyDAO;
+	}
+
+	public NewsDAO getNewsDao() {
+		return newsDao;
+	}
+
+	public void setNewsDao(NewsDAO newsDao) {
+		this.newsDao = newsDao;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

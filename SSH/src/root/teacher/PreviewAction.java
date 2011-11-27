@@ -2,12 +2,15 @@ package root.teacher;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -192,30 +195,21 @@ public class PreviewAction extends ActionSupport {
 		thesiss = teacher.getThesises();
 		previews = new ArrayList<Preview>();
 		List<Preview> previews_ = new ArrayList<Preview>();
-		List<Preview> previews_selected = new ArrayList<Preview>();
+
 		Iterator<Thesis> it = thesiss.iterator();
 		Iterator<Preview> it_ = null;
 		while (it.hasNext()) {
 			Thesis thesis_ = it.next();
-			// if (thesis_.getStudent() == null) {
-			it_ = thesis_.getPreviews().iterator();
+
+			Set<Preview> ps = new TreeSet<Preview>(new OrderByOrder());
+			ps.addAll(thesis_.getPreviews());
+			it_ = ps.iterator();
 			while (it_.hasNext()) {
 				Preview preview_ = it_.next();
-				// if (preview_.getStudent().getThesis() == null)
 				previews.add(preview_);
-				// else
-				// previews_.add(preview_);
 			}
-			// }
-			// else {
-			// it_ = thesis_.getPreviews().iterator();
-			// while (it_.hasNext()) {
-			// Preview preview_ = it_.next();
-			// previews_.add(preview_);
-			// }
-			// }
 		}
-		// previews.addAll(previews_);
+
 		if (page == 0)
 			page = 1;
 		totalPage = previews.size() / 10 + 1;
@@ -318,6 +312,15 @@ public class PreviewAction extends ActionSupport {
 
 	public void setPropertyDAO(PropertyDAO propertyDAO) {
 		this.propertyDAO = propertyDAO;
+	}
+
+}
+
+class OrderByOrder implements Comparator<Preview> {
+
+	@Override
+	public int compare(Preview o1, Preview o2) {
+		return o1.getSuborder() - o2.getSuborder();
 	}
 
 }

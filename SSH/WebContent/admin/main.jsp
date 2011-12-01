@@ -35,9 +35,11 @@
 									<a href="admin/studentPercent!query.action"> 设置预选学生比例 </a>
 								</li>
 								-->
+								<!--
 								<li>
 									<a href="admin/dbOperate.jsp"> 数据库操作 </a>
 								</li>
+								-->
 								<li>
 									<a href="admin/lwManage.jsp"> 论文管理 </a>
 								</li>

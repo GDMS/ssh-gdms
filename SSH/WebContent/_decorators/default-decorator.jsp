@@ -180,9 +180,11 @@
 							<!--
 								<li>
 									<a href="admin/studentPercent.jsp"> 设置预选学生比例 </a>
-								</li>
-								-->
-							<li><a href="admin/dbOperate.jsp"> 数据库操作 </a></li>
+								</li>							
+							    <li>
+									<a href="admin/dbOperate.jsp"> 数据库操作 </a>
+							    </li>
+							-->
 							<li><a href="admin/lwManage.jsp"> 论文管理 </a></li>
 							<li><a href="admin/viewSelect.jsp"> 查看视图 </a></li>
 							<li><a href="admin/studentInfo!query.action"> 管理学生信息 </a></li>

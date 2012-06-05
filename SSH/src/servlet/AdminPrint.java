@@ -53,10 +53,9 @@ public class AdminPrint extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		WebApplicationContext ctx = WebApplicationContextUtils
-				.getRequiredWebApplicationContext(this.getServletContext());
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this
+				.getServletContext());
 
 		StudentDAO studentDAO = ctx.getBean(StudentDAO.class);
 		// Session session = studentDAO.getSessionFactory().openSession();
@@ -72,7 +71,7 @@ public class AdminPrint extends HttpServlet {
 		String studentno = request.getParameter("studentno");
 		Student student = studentDAO.findById(studentno);
 		Thesis thesis = student.getThesis();
-		
+
 		StudentScore studentScore = student.getStudentScore();
 		String No = studentno;
 		String StudentName = student.getName();
@@ -151,7 +150,7 @@ public class AdminPrint extends HttpServlet {
 		Integer db1grade = studentScore.getDb1grade();//答辩成绩1
 		if (db1grade == null)
 			db1grade = ZERO;
-		Integer db2grade = studentScore.getDb1grade();//答辩成绩2
+		Integer db2grade = studentScore.getDb2grade();//答辩成绩2
 		if (db2grade == null)
 			db2grade = ZERO;
 
@@ -178,32 +177,31 @@ public class AdminPrint extends HttpServlet {
 		 * answer2line = 0; int question3line = 0; int answer3line = 0; int
 		 * proj_descline = 0; int thes_descline = 0;
 		 */
-		
+
 		int num = 0;
 		// 修正id,name,subname,classno,major
 		// major
 		final int MAJORLENGTH = 30;
-		int left ,right;
+		int left, right;
 		num = MAJORLENGTH - StringEx.length(major);
 		num = num / 2;
 		left = num / 2;
 		right = num - left;
-		for(int i=0;i<left;i++)
-			major = "&nbsp;"+major;
-		for(int i=0;i<right;i++)
+		for (int i = 0; i < left; i++)
+			major = "&nbsp;" + major;
+		for (int i = 0; i < right; i++)
 			major = major + "&nbsp;";
-		
+
 		// name
 		final int NAMELENGTH = 30;
 		num = NAMELENGTH - StringEx.length(name);
 		num = num / 2;
 		left = num / 2;
 		right = num - left;
-		for(int i=0;i<left;i++)
-			name = "&nbsp;"+name;
-		for(int i=0;i<right;i++)
+		for (int i = 0; i < left; i++)
+			name = "&nbsp;" + name;
+		for (int i = 0; i < right; i++)
 			name = name + "&nbsp;";
-		
 
 		// classno
 		final int CLASSNOLENGTH = 30;
@@ -211,9 +209,9 @@ public class AdminPrint extends HttpServlet {
 		num = num / 2;
 		left = num / 2;
 		right = num - left;
-		for(int i=0;i<left;i++)
-			classno = "&nbsp;"+classno;
-		for(int i=0;i<right;i++)
+		for (int i = 0; i < left; i++)
+			classno = "&nbsp;" + classno;
+		for (int i = 0; i < right; i++)
 			classno = classno + "&nbsp;";
 
 		// subname
@@ -222,21 +220,21 @@ public class AdminPrint extends HttpServlet {
 		num = num / 2;
 		left = num / 2;
 		right = num - left;
-		for(int i=0;i<left;i++)
-			subname = "&nbsp;"+subname;
-		for(int i=0;i<right;i++)
+		for (int i = 0; i < left; i++)
+			subname = "&nbsp;" + subname;
+		for (int i = 0; i < right; i++)
 			subname = subname + "&nbsp;";
-		
+
 		// studentno
-//		final int STUDENTNOLENGTH = 30;
-//		num = STUDENTNOLENGTH - StringEx.length(studentno);
-//		num = num / 2;
-//		left = num / 2;
-//		right = num - left;
-//		for(int i=0;i<left;i++)
-//			studentno = "&nbsp;"+studentno;
-//		for(int i=0;i<right;i++)
-//			studentno = studentno + "&nbsp;";
+		//		final int STUDENTNOLENGTH = 30;
+		//		num = STUDENTNOLENGTH - StringEx.length(studentno);
+		//		num = num / 2;
+		//		left = num / 2;
+		//		right = num - left;
+		//		for(int i=0;i<left;i++)
+		//			studentno = "&nbsp;"+studentno;
+		//		for(int i=0;i<right;i++)
+		//			studentno = studentno + "&nbsp;";
 		// calculus grade array
 		String sGrade = "";
 
@@ -286,15 +284,15 @@ public class AdminPrint extends HttpServlet {
 
 		for (int i = 1; i <= 8; i++) {
 			if (gg[i] <= 100 && gg[i] >= 85) {
-				ggg[i][1] = String.valueOf(Math.round(gg[i]));
+				ggg[i][1] = String.valueOf((float) (Math.round(gg[i] * 10)) / 10);
 			} else if (gg[i] < 85 && gg[i] >= 75) {
-				ggg[i][2] = String.valueOf(Math.round(gg[i]));
+				ggg[i][2] = String.valueOf((float) (Math.round(gg[i] * 10)) / 10);
 			} else if (gg[i] < 75 && gg[i] >= 67) {
-				ggg[i][3] = String.valueOf(Math.round(gg[i]));
+				ggg[i][3] = String.valueOf((float) (Math.round(gg[i] * 10)) / 10);
 			} else if (gg[i] < 67 && gg[i] >= 60) {
-				ggg[i][4] = String.valueOf(Math.round(gg[i]));
+				ggg[i][4] = String.valueOf((float) (Math.round(gg[i] * 10)) / 10);
 			} else if (gg[i] < 60 && gg[i] >= 0) {
-				ggg[i][5] = String.valueOf(Math.round(gg[i]));
+				ggg[i][5] = String.valueOf((float) (Math.round(gg[i] * 10)) / 10);
 			} else {
 				sGrade = "错误！";
 			}
@@ -315,7 +313,7 @@ public class AdminPrint extends HttpServlet {
 		}
 
 		response.setContentType("application/msword;charset=gb2312");
-		response.setHeader("Content-Disposition", "attachment;filename="+No+"_Graduation.doc");
+		response.setHeader("Content-Disposition", "attachment;filename=" + No + "_Graduation.doc");
 		PrintWriter out = response.getWriter();
 
 		out.write("<html xmlns:v=\"urn:schemas-microsoft-com:vml\"\r\n");
@@ -731,7 +729,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("line-height:24.0pt;mso-line-height-rule:exactly'><span style='font-size:14.0pt;\r\n");
 		out.write("font-family:宋体'>课题名称 <u><span lang=EN-US style='color:black'><span\r\n");
 		out.write("style='mso-spacerun:yes'></span></span><span\r\n");
-		out.write("style='color:black'>"+subname+"<span lang=EN-US><span\r\n");
+		out.write("style='color:black'>" + subname + "<span lang=EN-US><span\r\n");
 		out.write("style='mso-spacerun:yes'></span><o:p></o:p></span></span></u></span></p>\r\n");
 		out.write("\r\n");
 		out.write("<p class=MsoNormal style='text-indent:42.0pt;mso-char-indent-count:4.0'><span\r\n");
@@ -742,7 +740,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span>业 <u><span\r\n");
 		out.write("lang=EN-US style='color:black'><span\r\n");
 		out.write("style='mso-spacerun:yes'></span></span><span\r\n");
-		out.write("style='color:black'>"+major+"<span lang=EN-US><span\r\n");
+		out.write("style='color:black'>" + major + "<span lang=EN-US><span\r\n");
 		out.write("style='mso-spacerun:yes'>\r\n");
 		out.write("</span></span></span></u></span><u><span lang=EN-US style='font-size:14.0pt;\r\n");
 		out.write("font-family:宋体;mso-bidi-font-family:\"MS Mincho\";color:black'><o:p></o:p></span></u></p>\r\n");
@@ -755,7 +753,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("font-family:宋体'>班<span lang=EN-US><span\r\n");
 		out.write("style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span>级 <u><span\r\n");
 		out.write("lang=EN-US style='color:black'><span\r\n");
-		out.write("style='mso-spacerun:yes'></span>"+classno+"<span\r\n");
+		out.write("style='mso-spacerun:yes'></span>" + classno + "<span\r\n");
 		out.write("style='mso-spacerun:yes'>\r\n");
 		out.write("</span></span></u></span><u><span lang=EN-US style='font-size:14.0pt;\r\n");
 		out.write("font-family:宋体;mso-bidi-font-family:\"MS Mincho\";color:black'><o:p></o:p></span></u></p>\r\n");
@@ -767,7 +765,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("24.0pt;mso-line-height-rule:exactly'><span style='font-size:14.0pt;font-family:\r\n");
 		out.write("宋体'>学生姓名 <u><span lang=EN-US style='color:black'><span\r\n");
 		out.write("style='mso-spacerun:yes'></span></span><span\r\n");
-		out.write("style='color:black'>"+name+"<span lang=EN-US><span\r\n");
+		out.write("style='color:black'>" + name + "<span lang=EN-US><span\r\n");
 		out.write("style='mso-spacerun:yes'>\r\n");
 		out.write("</span></span></span></u></span><u><span lang=EN-US style='font-size:14.0pt;\r\n");
 		out.write("font-family:宋体;mso-bidi-font-family:\"MS Mincho\";color:black'><o:p></o:p></span></u></p>\r\n");
@@ -779,7 +777,8 @@ public class AdminPrint extends HttpServlet {
 		out.write("style='font-size:14.0pt;font-family:宋体'>学<span lang=EN-US><span\r\n");
 		out.write("style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span>号 <u><span\r\n");
 		out.write("lang=EN-US style='color:black'><span\r\n");
-		out.write("style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"+studentno+"<span\r\n");
+		out.write("style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+				+ studentno + "<span\r\n");
 		out.write("style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\r\n");
 		out.write("</span></span></u><span lang=EN-US><o:p></o:p></span></span></p>\r\n");
 		out.write("\r\n");
@@ -840,7 +839,8 @@ public class AdminPrint extends HttpServlet {
 		out.write("  12.0pt'> </span><span lang=EN-US style='font-size:12.0pt'><o:p></o:p></span></p>\r\n");
 		out.write("  <p class=MsoNormal style='text-indent:24.0pt;mso-char-indent-count:2.0;\r\n");
 		out.write("  line-height:150%'><span style='font-size:12.0pt;line-height:150%;font-family:\r\n");
-		out.write("  宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>课题描述："+thes_desc+"\r\n"+zdpingyu+"</span><span\r\n");
+		out.write("  宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>课题描述："
+				+ thes_desc + "\r\n" + zdpingyu + "</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt;line-height:150%'><o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
@@ -875,7 +875,8 @@ public class AdminPrint extends HttpServlet {
 		out.write("  style='font-size:12.0pt;line-height:150%'><span\r\n");
 		out.write("  style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span></span><span\r\n");
 		out.write("  style='font-size:12.0pt;line-height:150%;font-family:宋体;mso-ascii-font-family:\r\n");
-		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>项目描述："+proj_desc+"\r\n"+pypingyu+"</span><span\r\n");
+		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>项目描述：" + proj_desc + "\r\n"
+				+ pypingyu + "</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt;line-height:150%'></span><span\r\n");
 		out.write("  style='font-size:12.0pt;line-height:150%;font-family:宋体;mso-ascii-font-family:\r\n");
 		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'></span><span\r\n");
@@ -942,13 +943,14 @@ public class AdminPrint extends HttpServlet {
 		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>问题</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt'>1</span><span style='font-size:12.0pt;\r\n");
 		out.write("  font-family:宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\r\n");
-		out.write("  \"Times New Roman\"'>："+question1+"</span><span lang=EN-US style='font-size:\r\n");
+		out.write("  \"Times New Roman\"'>：" + question1 + "</span><span lang=EN-US style='font-size:\r\n");
 		out.write("  12.0pt'> <br>\r\n");
 		out.write("  </span><span style='font-size:12.0pt;font-family:宋体;mso-ascii-font-family:\r\n");
 		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>回答</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt'>1</span><span style='font-size:12.0pt;\r\n");
 		out.write("  font-family:宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\r\n");
-		out.write("  \"Times New Roman\"'>："+answer1+"</span><span lang=EN-US style='font-size:12.0pt'></span><span\r\n");
+		out.write("  \"Times New Roman\"'>：" + answer1
+				+ "</span><span lang=EN-US style='font-size:12.0pt'></span><span\r\n");
 		out.write("  style='font-size:12.0pt;font-family:宋体;mso-ascii-font-family:\"Times New Roman\";\r\n");
 		out.write("  mso-hansi-font-family:\"Times New Roman\"'></span><span lang=EN-US\r\n");
 		out.write("  style='font-size:12.0pt'><br>\r\n");
@@ -956,25 +958,26 @@ public class AdminPrint extends HttpServlet {
 		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>问题</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt'>2</span><span style='font-size:12.0pt;\r\n");
 		out.write("  font-family:宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\r\n");
-		out.write("  \"Times New Roman\"'>："+question2+"</span><span lang=EN-US style='font-size:12.0pt'>\r\n");
+		out.write("  \"Times New Roman\"'>：" + question2 + "</span><span lang=EN-US style='font-size:12.0pt'>\r\n");
 		out.write("  <br>\r\n");
 		out.write("  </span><span style='font-size:12.0pt;font-family:宋体;mso-ascii-font-family:\r\n");
 		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>回答</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt'>2</span><span style='font-size:12.0pt;\r\n");
 		out.write("  font-family:宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\r\n");
-		out.write("  \"Times New Roman\"'>："+answer2+"</span><span lang=EN-US\r\n");
+		out.write("  \"Times New Roman\"'>：" + answer2 + "</span><span lang=EN-US\r\n");
 		out.write("  style='font-size:12.0pt'> <br>\r\n");
 		out.write("  </span><span style='font-size:12.0pt;font-family:宋体;mso-ascii-font-family:\r\n");
 		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>问题</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt'>3</span><span style='font-size:12.0pt;\r\n");
 		out.write("  font-family:宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\r\n");
-		out.write("  \"Times New Roman\"'>："+question3+"</span><span lang=EN-US\r\n");
+		out.write("  \"Times New Roman\"'>：" + question3 + "</span><span lang=EN-US\r\n");
 		out.write("  style='font-size:12.0pt'><br>\r\n");
 		out.write("  </span><span style='font-size:12.0pt;font-family:宋体;mso-ascii-font-family:\r\n");
 		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>回答</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt'>3</span><span style='font-size:12.0pt;\r\n");
 		out.write("  font-family:宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\r\n");
-		out.write("  \"Times New Roman\"'>："+answer3+"</span><span lang=EN-US style='font-size:12.0pt'></span><span\r\n");
+		out.write("  \"Times New Roman\"'>：" + answer3
+				+ "</span><span lang=EN-US style='font-size:12.0pt'></span><span\r\n");
 		out.write("  style='font-size:12.0pt;font-family:宋体;mso-ascii-font-family:\"Times New Roman\";\r\n");
 		out.write("  mso-hansi-font-family:\"Times New Roman\"'></span><span lang=EN-US\r\n");
 		out.write("  style='font-size:12.0pt'></span><span style='font-size:12.0pt;\r\n");
@@ -1018,7 +1021,8 @@ public class AdminPrint extends HttpServlet {
 		out.write("  line-height:150%'><span lang=EN-US style='font-size:12.0pt;line-height:150%'><o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  <p class=MsoNormal style='text-indent:24.0pt;mso-char-indent-count:2.0;\r\n");
 		out.write("  line-height:150%'><span style='font-size:12.0pt;line-height:150%;font-family:\r\n");
-		out.write("  宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>"+dbpingyu+"</span><span\r\n");
+		out.write("  宋体;mso-ascii-font-family:\"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>"
+				+ dbpingyu + "</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt;line-height:150%'><o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
@@ -1211,7 +1215,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[1][1]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[1][1] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1219,7 +1223,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[1][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[1][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1227,7 +1231,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[1][3]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[1][3] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1235,7 +1239,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[1][4]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[1][4] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=58 colspan=2 style='width:43.5pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1243,7 +1247,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[1][5]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[1][5] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1257,7 +1261,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[1]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[1] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:3;page-break-inside:avoid;height:18.7pt'>\r\n");
@@ -1276,7 +1280,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[2][1]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[2][1] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1284,7 +1288,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[2][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[2][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1292,7 +1296,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[2][3]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[2][3] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1300,7 +1304,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[2][4]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[2][4] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=58 colspan=2 style='width:43.5pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1308,7 +1312,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[2][5]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[2][5] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1322,7 +1326,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:4;page-break-inside:avoid;height:18.7pt'>\r\n");
@@ -1341,7 +1345,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[3][1]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[3][1] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1349,7 +1353,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[3][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[3][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1357,7 +1361,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[3][3]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[3][3] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1365,7 +1369,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[3][4]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[3][4] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=58 colspan=2 style='width:43.5pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1373,7 +1377,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[3][5]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[3][5] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1387,7 +1391,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[3]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[3] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:5;page-break-inside:avoid;height:18.7pt'>\r\n");
@@ -1406,7 +1410,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[4][1]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[4][1] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1414,7 +1418,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[4][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[4][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1422,7 +1426,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[4][3]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[4][3] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=53 colspan=2 style='width:39.6pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1430,7 +1434,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[4][4]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[4][4] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=58 colspan=2 style='width:43.5pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1438,7 +1442,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[4][5]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[4][5] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1452,7 +1456,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[4]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[4] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:6;page-break-inside:avoid;height:18.7pt'>\r\n");
@@ -1478,7 +1482,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:18.7pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+sum[1]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + sum[1] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:7;page-break-inside:avoid;height:20.05pt'>\r\n");
@@ -1510,7 +1514,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[5][1]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[5][1] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1518,7 +1522,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[5][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[5][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1526,7 +1530,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[5][3]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[5][3] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1534,14 +1538,14 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[5][4]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[5][4] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=55 style='width:41.3pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[5][5]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[5][5] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1555,7 +1559,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[5]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[5] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:8;page-break-inside:avoid;height:20.05pt'>\r\n");
@@ -1575,7 +1579,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[6][1]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[6][1] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1583,7 +1587,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[6][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[6][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1591,7 +1595,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[6][3]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[6][3] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1599,14 +1603,14 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[6][4]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[6][4] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=55 style='width:41.3pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[6][5]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[6][5] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1620,7 +1624,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[6]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[6] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:9;page-break-inside:avoid;height:20.05pt'>\r\n");
@@ -1646,7 +1650,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+sum[2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + sum[2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:10;page-break-inside:avoid;height:20.05pt'>\r\n");
@@ -1674,7 +1678,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[7][1]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[7][1] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1682,7 +1686,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[7][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[7][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1690,7 +1694,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[7][3]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[7][3] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1698,14 +1702,14 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[7][4]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[7][4] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=55 style='width:41.3pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[7][5]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[7][5] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1719,7 +1723,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[7]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[7] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:11;page-break-inside:avoid;height:20.05pt'>\r\n");
@@ -1739,7 +1743,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[8][1]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[8][1] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1747,7 +1751,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[8][2]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[8][2] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1755,7 +1759,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[8][3]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[8][3] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=54 colspan=2 style='width:40.15pt;border-top:none;border-left:none;\r\n");
 		out.write("  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;\r\n");
@@ -1763,14 +1767,14 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[8][4]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[8][4] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=55 style='width:41.3pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+ggg[8][5]+"<o:p>&nbsp;</o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + ggg[8][5] + "<o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write("  <td width=60 style='width:45.0pt;border-top:none;border-left:none;border-bottom:\r\n");
 		out.write("  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;mso-border-top-alt:\r\n");
@@ -1784,7 +1788,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+g[8]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + g[8] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:12;page-break-inside:avoid;height:20.05pt'>\r\n");
@@ -1810,7 +1814,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  solid windowtext .75pt;mso-border-left-alt:solid windowtext .75pt;mso-border-alt:\r\n");
 		out.write("  solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+sum[3]+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + sum[3] + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:13;page-break-inside:avoid;height:20.05pt'>\r\n");
@@ -1842,7 +1846,7 @@ public class AdminPrint extends HttpServlet {
 		out.write("  mso-border-alt:solid windowtext .75pt;padding:0cm 1.4pt 0cm 1.4pt;height:\r\n");
 		out.write("  20.05pt'>\r\n");
 		out.write("  <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US\r\n");
-		out.write("  style='font-size:12.0pt'>"+grade+"<o:p></o:p></span></p>\r\n");
+		out.write("  style='font-size:12.0pt'>" + grade + "<o:p></o:p></span></p>\r\n");
 		out.write("  </td>\r\n");
 		out.write(" </tr>\r\n");
 		out.write(" <tr style='mso-yfti-irow:14;mso-yfti-lastrow:yes;page-break-inside:avoid;\r\n");
@@ -1874,7 +1878,8 @@ public class AdminPrint extends HttpServlet {
 		out.write("  <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  <p class=MsoNormal><span style='font-size:12.0pt;font-family:宋体;mso-ascii-font-family:\r\n");
-		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>成绩等级（优、良、中、及格、不及格）："+sGrade+"</span><span\r\n");
+		out.write("  \"Times New Roman\";mso-hansi-font-family:\"Times New Roman\"'>成绩等级（优、良、中、及格、不及格）：" + sGrade
+				+ "</span><span\r\n");
 		out.write("  lang=EN-US style='font-size:12.0pt'><o:p></o:p></span></p>\r\n");
 		out.write("  <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></p>\r\n");
 		out.write("  <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></p>\r\n");
@@ -1950,5 +1955,4 @@ public class AdminPrint extends HttpServlet {
 		out.write("</html>\r\n");
 
 	}
-
 }

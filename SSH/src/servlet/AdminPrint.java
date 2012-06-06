@@ -29,6 +29,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import root.admin.ClassnoDelAction;
 
+import util.MathEx;
 import util.StringEx;
 
 @Transactional
@@ -262,17 +263,28 @@ public class AdminPrint extends HttpServlet {
 		gg[8] = db2grade;
 
 		g[1] = (float) (gg[1] * 0.15);
+		g[1] = MathEx.round1(g[1]);
 		g[2] = (float) (gg[2] * 0.05);
+		g[2] = MathEx.round1(g[2]);
 		g[3] = (float) (gg[3] * 0.05);
+		g[3] = MathEx.round1(g[3]);
 		g[4] = (float) (gg[4] * 0.05);
+		g[4] = MathEx.round1(g[4]);
 		g[5] = (float) (gg[5] * 0.20);
+		g[5] = MathEx.round1(g[5]);
 		g[6] = (float) (gg[6] * 0.10);
+		g[6] = MathEx.round1(g[6]);
 		g[7] = (float) (gg[7] * 0.10);
+		g[7] = MathEx.round1(g[7]);
 		g[8] = (float) (gg[8] * 0.30);
+		g[8] = MathEx.round1(g[8]);
 
 		sum[1] = g[1] + g[2] + g[3] + g[4];
+		sum[1] = MathEx.round1(sum[1]);
 		sum[2] = g[5] + g[6];
+		sum[2] = MathEx.round1(sum[2]);
 		sum[3] = g[7] + g[8];
+		sum[3] = MathEx.round1(sum[3]);
 
 		String ggg[][] = new String[9][6];
 
